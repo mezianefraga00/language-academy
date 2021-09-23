@@ -1,20 +1,20 @@
 import React, { useState } from "react";
-import { Redirect, Route, Router } from "react-router";
-import { useHistory, BrowserRouter, withRouter } from "react-router-dom";
-import Course from "./Course";
-import RegisterPro from "./RegisterPro";
+import { useHistory, BrowserRouter, withRouter, Link } from "react-router-dom";
+import { Redirect } from "react-router";
 
 function LoginProfessor() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [accept, setAccept] = useState("");
+  const [errors, setErrors] = useState("");
+
   const [register, setRegister] = useState("");
   const history = useHistory();
   console.log("dd");
   const handleSubmit = () => {
-    console.log(username);
-    console.log(password);
-    fetch("/login", {
+    setErrors("");
+
+    fetch("/loginprofessor", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -24,21 +24,19 @@ function LoginProfessor() {
       if (r.ok) {
         setAccept(true);
       } else {
-        console.log("r.username");
+        setErrors("password or username incorrect");
       }
     });
   };
 
   if (accept === true) {
     history.push("/Course");
-  } else {
-    console.log("hello");
   }
   const handleregister = () => {
     setRegister(true);
   };
   if (register === true) {
-    return <RegisterPro />;
+    return <Redirect to="/registerpro"></Redirect>;
   }
   return (
     <section className="vh-100">
@@ -46,6 +44,7 @@ function LoginProfessor() {
         <div className="row d-flex justify-content-center align-items-center h-100">
           <div className="col-md-9 col-lg-6 col-xl-5"></div>
           <div className="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+            <p className="text-danger">{errors}</p>
             <form>
               <div className="form-outline mb-4">
                 <input

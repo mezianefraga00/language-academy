@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import LoginProfessor from "./LoginProfessor";
 import LoginStudent from "./LoginStudent";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Course from "./Course";
-import NewCourse from "./NewCourse";
-import Signup from "./Signup";
+
 import "../App.css";
 
 export default function Home() {
@@ -29,36 +26,8 @@ export default function Home() {
           student
         </button>
       </div>
-      {choice === "professor" ? (
-        <Router>
-          <Switch>
-            <Route exact path="/login" component={LoginProfessor} />
-            <Route
-              exact
-              path="/Course"
-              component={() => <Course accept={true} />}
-            />
-            <Route path="/new">
-              <NewCourse />
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-          </Switch>
-        </Router>
-      ) : null}
-      {choice === "student" ? (
-        <Router>
-          <Switch>
-            <Route exact path="/login" component={LoginStudent} />
-            <Route
-              exact
-              path="/Course"
-              component={() => <Course accept={true} />}
-            />
-          </Switch>
-        </Router>
-      ) : null}
+      {choice === "professor" ? <LoginProfessor /> : null}
+      {choice === "student" ? <LoginStudent /> : null}
     </div>
   );
 }

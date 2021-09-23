@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { Redirect, Route, Router } from "react-router";
-import { useHistory, BrowserRouter, withRouter } from "react-router-dom";
-import Course from "./Course";
-import RegisterStu from "./RegisterStu";
+import { Redirect, useHistory } from "react-router";
+import { BrowserRouter as Link, withRouter } from "react-router-dom";
 
 function LoginStudent() {
   const [username, setUsername] = useState("");
@@ -30,15 +28,17 @@ function LoginStudent() {
   };
 
   if (accept === true) {
-    history.push("/Course");
+    history.push("/course");
   } else {
     console.log("hello");
   }
   const handleregister = () => {
     setRegister(true);
   };
+
   if (register === true) {
-    return <RegisterStu />;
+    console.log(register);
+    return <Redirect to="/registerstu"></Redirect>;
   }
   return (
     <section className="vh-100">

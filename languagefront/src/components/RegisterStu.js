@@ -13,9 +13,8 @@ export default function RegisterStud() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setErrors([]);
     setIsLoading(true);
-    fetch("/signup_student", {
+    fetch("/signupstu", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,7 +31,7 @@ export default function RegisterStud() {
       if (r.ok) {
         setRegister(true);
       } else {
-        r.json().then((err) => setErrors(err.errors));
+        console.log(r);
       }
     });
   }
@@ -138,9 +137,7 @@ export default function RegisterStud() {
                         </label>
                       </div>
 
-                      <button type="submit" onClick={handleSubmit}>
-                        {isLoading ? "Loading..." : "Sign Up"}
-                      </button>
+                      <button type="submit" onClick={handleSubmit}></button>
 
                       {errors.map((err) => (
                         <p className="text-danger">{err}</p>

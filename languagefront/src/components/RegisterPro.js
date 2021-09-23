@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Course from "./Course";
 
 export default function RegisterPro() {
   const [username, setUsername] = useState("");
@@ -13,7 +14,7 @@ export default function RegisterPro() {
     e.preventDefault();
     setErrors([]);
     setIsLoading(true);
-    fetch("/signup_professor", {
+    fetch("/signuppro", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -32,6 +33,9 @@ export default function RegisterPro() {
         r.json().then((err) => setErrors(err.errors));
       }
     });
+  }
+  if (registred === true) {
+    return <Course />;
   }
 
   return (
@@ -119,9 +123,7 @@ export default function RegisterPro() {
                         </label>
                       </div>
 
-                      <button type="submit" onClick={handleSubmit}>
-                        {isLoading ? "Loading..." : "Sign Up"}
-                      </button>
+                      <button type="submit" onClick={handleSubmit}></button>
 
                       {errors.map((err) => (
                         <p className="text-danger">{err}</p>
